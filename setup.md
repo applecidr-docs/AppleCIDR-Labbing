@@ -9,4 +9,4 @@ title: Pre Requisites
 
 > `*username* ALL=(ALL:ALL) ALL`
 
-<script src="{{ '/assets/js/copy-code.js' | relative_url }}"></script>
+
