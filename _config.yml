@@ -7,7 +7,8 @@ tagline: Just an idiot labbing networks
 description: Using ContainerLab and primarily Aruba CX Switch Simulator to learn networking concepts
 
 nav:
-  - name: "Setup"
-    link: /setup
   - name: "Home"
     link: /README
+  - name: "Setup"
+    link: /setup
+
