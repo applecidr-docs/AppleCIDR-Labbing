@@ -8,7 +8,7 @@ description: Using ContainerLab and primarily Aruba CX Switch Simulator to learn
 
 nav:
   - name: "Home"
-    link: /README
+    link: /
   - name: "Setup"
     link: /setup
 
