@@ -6,5 +6,6 @@ title: Prerequisites
 # **Prerequisites**
 ### I. User must have sudo privileges
 `sudo visudo`
+
 `*username* ALL=(ALL:ALL) ALL`
 
