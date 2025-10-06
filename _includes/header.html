@@ -1,1 +1,7 @@
-
+<nav style="background-color:#222; padding: 10px; text-align:center;">
+  {% for item in site.nav %}
+    <a href="{{ item.link | relative_url }}" style="color:#fff; margin:0 15px; text-decoration:none;">
+      {{ item.name }}
+    </a>
+  {% endfor %}
+</nav>
