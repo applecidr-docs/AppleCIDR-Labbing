@@ -1,4 +1,7 @@
 ---
 title: Pre Requisites
 ---
-1. User must have sudo privileges
+# Pre Requisites
+## 1. User must have sudo privileges
+> sudo visudo
+> *username* ALL=(ALL:ALL) ALL
