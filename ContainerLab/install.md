@@ -16,7 +16,37 @@ sudo tee -a /etc/apt/sources.list.d/netdevops.list
 ```bash
 sudo apt update && sudo apt install containerlab
 ```
-#### C. If you'd like to use the ContainerLab bash prompt (a little nicer and more functional than the default prompt), run the following script
+#### C. If you'd like to use the ContainerLab bash prompt (a little nicer and more functional than the default prompt), run the following script, then logout and log back in.
 ```bash
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "setup-bash-prompt"
 ```
+### II. Install vrnetlab and configure the Aruba CX Switch Simulator
+> Because the Aruba CX Switch Simulator is essentially a virtual machine, we will need to install vrnetlab to package the VM inside a container
+
+#### A. Clone srl-labs/vrnetlab and cd into the vrnetlab directory
+```bash
+git clone https://github.com/srl-labs/vrnetlab && cd vrnetlab
+```
+#### B. cd into the aruba/aoscx directory 
+```bash
+cd aruba/aoscx
+```
+> At this point you can follow along with the README.md file in the aoscx directory, but I will also go through the steps here. The switch simulator zip file is in my Downloads directory, but you will need to substitute the file path to wherever you have the zip file saved to.
+
+#### C. Extract VMDK file
+Unzip the OVA file out of the zip file, untar the VMDK out of the OVA file, and copy the VMDK into the aoscx directory.
+```bash
+unzip ~/Downloads/AOS-CX_Switch_Simulator_10_16_1006_ova.zip ~/Downloads/AOS-CX_10_16_1006.ova
+tar -xvf ~/Downloads/AOS-CX_10_16_1006.ova
+cp ~/Downloads/arubaoscx-disk-image-genericx86-p4-20250822141147.vmdk arubaoscx-disk-image-genericx86-p4-20250822141147.vmdk
+```
+#### D. Run make command
+Once the VMDK file is in the aoscx directory run the following command to make the docker image
+```bash
+make docker-image
+```
+#### E. Verify that the image is available
+```bash
+docker images
+```
+You should see vrnetlab/aruba_arubaos-cx listed as an available docker image
