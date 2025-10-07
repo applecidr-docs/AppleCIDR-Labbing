@@ -50,3 +50,8 @@ make docker-image
 docker images
 ```
 You should see vrnetlab/aruba_arubaos-cx listed as an available docker image
+#### F. Tag the docker image (optional)
+I am going to tag the docker image with the version of the image for ease of use. The existing tag may differ from the tag that you see below, but running `docker images` will show the image tag.
+```bash
+docker tag vrnetlab/vr-aoscx:20250822141147 aruba_aoscx:10.16_1006
+```
