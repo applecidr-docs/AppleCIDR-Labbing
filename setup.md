@@ -10,3 +10,9 @@ title: Prerequisites
 > `sudo visudo`
 
 > `username ALL=(ALL:ALL) ALL`
+
+### II. Install Docker
+⋅⋅⋅⋅* Uninstall any conflicting packages that may already be installed
+```bash
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
