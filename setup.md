@@ -14,7 +14,7 @@ sudo visudo
 username ALL=(ALL:ALL) ALL
 ```
 ### II. Install Docker
-#### A. Uninstall any conflicting packages that may already be installed
+<dd>A. Uninstall any conflicting packages that may already be installed</dd>
 ```bash
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
