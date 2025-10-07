@@ -4,7 +4,7 @@ plugins:
 
 title: AppleCIDR Labbing
 tagline: Just an idiot labbing networks
-description: Using ContainerLab and primarily Aruba CX Switch Simulator to learn networking concepts
+description: Just an idiot that loves networking
 
 nav:
   - name: "Home"
