@@ -14,7 +14,8 @@ sudo visudo
 username ALL=(ALL:ALL) ALL
 ```
 ### II. Install Docker
-> The following instructions can be found on the officail Dockerdocs site <a href="https://docs.docker.com/engine/install/debian/">here</a>
+> The following instructions can be found on the official DockerDocs site <a href="https://docs.docker.com/engine/install/debian/">here</a>
+
 #### A. Uninstall any conflicting packages that may already be installed
 ```bash
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -37,3 +38,20 @@ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```bash
 sudo apt-get update
 ```
+#### D. Install the latest version of Docker packages
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+#### E. Verify that the Docker service started automatically, and if it did not, start it
+```bash
+sudo systemctl status docker
+```
+```bash
+# In case the service did not start
+sudo systemctl start docker
+```
+#### F. Verify that the installation was successful by running the hello-world image
+```bash
+sudo docker run hello-world
+```
+> This command downloads a test image, runs it in a container, and prints a confirmation message then exits.
