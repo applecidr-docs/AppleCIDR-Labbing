@@ -55,3 +55,9 @@ sudo systemctl start docker
 sudo docker run hello-world
 ```
 > This command downloads a test image, runs it in a container, and prints a confirmation message then exits.
+
+### III. Download the Aruba CX Switch Simulator
+> As of writing this, the newest version of the switch simulator is 10.16.1006 which will work with ContainerLab
+
+#### A. If you do not already have an HPE Support Portal account you will need to create one <a href="https://networkingsupport.hpe.com/">here</a>
+#### B. Once you are logged into the HPE Support Portal go to the Downloads page <a href="https://networkingsupport.hpe.com/globalsearch#tab=Software">here</a>, search for "Switch Simulator", and sort by "Date: New to Old"
