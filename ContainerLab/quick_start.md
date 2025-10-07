@@ -13,6 +13,9 @@ mkdir clab-quick-start && cd clab-quick-start
 ```
 #### B. Create ContainerLab config file
 ContainerLab uses yaml for configurtion. We will define the two switches as nodes and endpoints to connect the switches together. 
+```bash
+sudo nano aruba-quick-start.clab.yml
+```
 > The two switches will be called 'aos-SwitchA' and 'aos-SwitchB'. The two switches will be connect via interface 1/1/1.
 
 ```yaml
