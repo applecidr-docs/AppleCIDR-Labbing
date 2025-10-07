@@ -6,12 +6,17 @@ title: ContainerLab Install
 > We will be running the ContainerLab install script. These instructions can be found in the official ContainerLab documentation <a href="https://containerlab.dev/install/#__tabbed_1_1">here</a>
 
 # **Install**
-### I. ContainerLab install script
-#### A. Download and install the latest release (this may require sudo)
+### I. ContainerLab install
+#### A. Add the ContainerLab repository to sources.list.d directory
 ```bash
-bash -c "$(curl -sL https://get.containerlab.dev)"
+echo "deb [trusted=yes] https://netdevops.fury.site/apt/ /" | \
+sudo tee -a /etc/apt/sources.list.d/netdevops.list
 ```
-#### B. If you'd like to use the ContainerLab bash prompt (a little nicer and more functional than the default prompt), run the following script
+#### B. Run APT update and install ContaierLab via APT
+```bash
+sudo apt update && sudo apt install containerlab
+```
+#### C. If you'd like to use the ContainerLab bash prompt (a little nicer and more functional than the default prompt), run the following script
 ```bash
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "setup-bash-prompt"
 ```
