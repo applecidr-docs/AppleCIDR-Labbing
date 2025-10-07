@@ -33,3 +33,17 @@ topology:
   links:
     - endpoints: [aos-SwitchA:1/1/1, aos-SwitchB:1/1/1]
 ```
+#### C. Deploy the ContainerLab
+We will run the clab deploy command from inside the aruba-quick-start directory. ContainerLab will read the .clab.yml file and deploy the lab.
+> The Aruba CX Switch Simulator will take ~ 2 minutes to boot
+
+```bash
+clab deploy
+```
+#### D. Verify
+ContainerLab will show the Name, Kind/Image, State, and IP address information for the lab as it is deployed. We can run `clab inspect` at anytime to see if the switches state has changed from 'starting' to 'healthy'. Once the lab has successfully deployed you can run the following to get further information about the containers:
+```bash
+docker ps
+```
+This docker command will show the docker containers are running and will also show you the name of the container.
+> ContainerLab will prepend the name of the lab to each node name. For instance, with this lab SwitchA's container will be named 'clab-aruba-quick-start-aos-SwitchA'
