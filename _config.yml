@@ -11,3 +11,5 @@ nav:
     link: /
   - name: "Prerequisites"
     link: /ContainerLab/prerequisites
+  - name: "Install"
+    link: /ContainerLab/install
