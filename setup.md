@@ -14,6 +14,7 @@ sudo visudo
 username ALL=(ALL:ALL) ALL
 ```
 ### II. Install Docker
+> The following instructions can be found on the officail Dockerdocs site <a href="https://docs.docker.com/engine/install/debian/">here</a>
 #### A. Uninstall any conflicting packages that may already be installed
 ```bash
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -29,8 +30,10 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 #### C. Add the repository to APT sources and update to install
 ```bash
 echo \
-<dd>"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
 $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</dd>
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+```bash
 sudo apt-get update
 ```
