@@ -13,3 +13,5 @@ nav:
     link: /ContainerLab/prerequisites
   - name: "Install"
     link: /ContainerLab/install
+  - name: "Quick Start"
+    link: /ContainerLab/quick_start
