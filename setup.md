@@ -29,8 +29,8 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 #### C. Add the repository to APT sources and update to install
 ```bash
 echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+<dd>"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</dd>
 sudo apt-get update
 ```
