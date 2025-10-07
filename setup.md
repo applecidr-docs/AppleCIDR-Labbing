@@ -7,10 +7,12 @@ title: Prerequisites
 
 # **Prerequisites**
 ### I. User must have sudo privileges
-> `sudo visudo`
-
-> `username ALL=(ALL:ALL) ALL`
-
+```bash
+sudo visudo
+```
+```bash
+username ALL=(ALL:ALL) ALL
+```
 ### II. Install Docker
 ⋅⋅⋅⋅* Uninstall any conflicting packages that may already be installed
 ```bash
