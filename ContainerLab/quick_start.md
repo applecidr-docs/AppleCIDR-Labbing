@@ -171,10 +171,15 @@ PING 10.10.10.1 (10.10.10.1) 100(128) bytes of data.
 rtt min/avg/max/mdev = 2.545/5.569/16.011/5.225 ms
 ```
 ### V. Finally, we will destory the lab
-Let's give the resources back to our host machine by destorying our lab
+Let's give the resources back to our host machine by destroying our lab
 > It's important that the `clab` commands are ran in the context of our lab's directory. Specifically in this case, the destory command must be ran inside the 'clab-quick-start' directory that was created at the beginning of this document.
+
 ```bash
 clab destory
 ```
 ContainerLab will remove the docker containers, remove the /etc/hosts entries, and remove the SSH config files.
 > This lab was complete entirely from the command line. If you prefer a more visual approach to labbing, you can install the VSCode ContainerLab Extension. Instructions for doing so and using the extension can be found here.
+
+<p style="font-family: 'Fira Code', monospace; font-size: 16px;">
+Thanks for reading!
+</p>
