@@ -52,7 +52,7 @@ This docker command will show the docker containers are running and will also sh
 #### A. SSH
 As explained above, by using the `docker ps` command we can find the name of the Switches. The name can then be used to ssh into the switch as follows:
 ```bash
-ssh manager@clab-aruba-quick-start-aos-SwitchA
+ssh admin@clab-aruba-quick-start-aos-SwitchA
 ```
 > Two things happen when ContainerLab spins up a lab in regards to SSH. First, ContainerLab adds entries to the /etc/hosts file so that we can SSH into the devices by name. Then, ContainerLab add SSH configs for the nodes to the /etc/ssh/ssh_config.d directory so that we are not prompted to accept the SSH keys when we connect.
 
@@ -84,3 +84,21 @@ Host clab-aruba-quick-start-aos-SwitchB
         UserKnownHostsFile=/dev/null
 ```
 ###### _Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file_
+Now that we have connected to the switch via SSH, we are being asked to provide a password for the admin user. During the creation of the Docker image, a python script is ran that sets the password of 'admin'. The script can be found within the vrnetlab directory. The full path is _/vrnetlab/aruba/aoscx/docker/launch.py_ and below is the code snippet that sets the password of 'admin' for the built-in admin user.
+```python
+# --- snip ---
+if match:  # got a match!
+  if ridx == 0:  # login
+    self.logger.debug("trying to log in with 'admin'")
+    self.wait_write("\r", wait=None)
+    self.logger.debug("sent newline")
+    self.wait_write("admin", wait="switch login:")
+    self.logger.debug("sent username")
+    self.wait_write("\r", wait="Password:")
+    self.logger.debug("sent empty password")
+    self.logger.debug("resetting password")
+    self.wait_write("admin", wait="Enter new password:")
+    self.wait_write("admin", wait="Confirm new password:")
+# --- snip ---
+```
+### III. Run show commands
