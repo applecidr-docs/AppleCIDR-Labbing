@@ -46,4 +46,42 @@ ContainerLab will show the Name, Kind/Image, State, and IP address information f
 docker ps
 ```
 This docker command will show the docker containers are running and will also show you the name of the container.
-> ContainerLab will prepend the name of the lab to each node name. For instance, with this lab SwitchA's container will be named 'clab-aruba-quick-start-aos-SwitchA'
+> ContainerLab will prepend 'clab' and the name of the lab to each node name. For instance, with this lab SwitchA's container will be named 'clab-aruba-quick-start-aos-SwitchA'
+
+### II. Connecting to lab
+#### A. SSH
+As explained above, by using the `docker ps` command we can find the name of the Switches. The name can then be used to ssh into the switch as follows:
+```bash
+ssh manager@clab-aruba-quick-start-aos-SwitchA
+```
+> Two things happen when ContainerLab spins up a lab in regards to SSH. First, ContainerLab adds entries to the /etc/hosts file so that we can SSH into the devices by name. Then, ContainerLab add SSH configs for the nodes to the /etc/ssh/ssh_config.d directory so that we are not prompted to accept the SSH keys when we connect.
+
+```bash
+127.0.0.1       localhost
+127.0.1.1       ITD000117.eriecountygov.local   ITD000117
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+###### CLAB-aruba-quick-start-START ######
+172.20.20.2     clab-aruba-quick-start-aos-SwitchA      # Kind: aruba_aoscx
+172.20.20.3     clab-aruba-quick-start-aos-SwitchB      # Kind: aruba_aoscx
+3fff:172:20:20::2       clab-aruba-quick-start-aos-SwitchA      # Kind: aruba_aoscx
+3fff:172:20:20::3       clab-aruba-quick-start-aos-SwitchB      # Kind: aruba_aoscx
+###### CLAB-aruba-quick-start-END ######
+```
+###### Example of /etc/hosts file
+```bash
+# Containerlab SSH Config for the aruba-quick-start lab
+Host clab-aruba-quick-start-aos-SwitchA
+        User admin
+        StrictHostKeyChecking=no
+        UserKnownHostsFile=/dev/null
+
+Host clab-aruba-quick-start-aos-SwitchB
+        User admin
+        StrictHostKeyChecking=no
+        UserKnownHostsFile=/dev/null
+```
+###### Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file
