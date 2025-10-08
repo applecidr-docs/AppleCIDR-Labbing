@@ -180,6 +180,6 @@ clab destory
 ContainerLab will remove the docker containers, remove the /etc/hosts entries, and remove the SSH config files.
 > This lab was complete entirely from the command line. If you prefer a more visual approach to labbing, you can install the VSCode ContainerLab Extension. Instructions for doing so and using the extension can be found here.
 
-<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; font-color:#b5e853">
+<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
 Thanks for reading!
 </p>
