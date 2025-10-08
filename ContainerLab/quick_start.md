@@ -101,7 +101,7 @@ if match:  # got a match!
     self.wait_write("admin", wait="Confirm new password:")
 # --- snip ---
 ```
-### III. Run show commands
+### III. Run a show command
 I have connected to the switches via the following SSH commands `ssh admin@clab-aruba-quick-start-aos-SwitchA` and `ssh admin@clab-aruba-quick-start-aos-SwitchB`. By default the interfaces of the switch simulator are administratively disabled, so before running our show commands we are going to enable the interfaces:
 ```shell
 aos-SwitchA# conf t
@@ -144,4 +144,29 @@ Total Neighbor Entries Aged-Out : 0
 LOCAL-PORT  CHASSIS-ID         PORT-ID                      PORT-DESC                    TTL      SYS-NAME    
 -----------------------------------------------------------------------------------------------------------
 1/1/1       08:00:09:ea:bd:da  1/1/1                        1/1/1                        120      aos-SwitchA
+```
+### IV. Let's test layer 3 connectivity!
+We will assign an IP address to interface 1/1/1 on both switches and confirm connectivity using ping.
+```shell
+aos-SwitchA# conf t
+aos-SwitchA(config)# int 1/1/1
+aos-SwitchA(config-if)# ip address 10.10.10.1/24
+```
+```shell
+aos-SwitchB# conf t
+aos-SwitchB(config)# int 1/1/1
+aos-SwitchB(config-if)# ip address 10.10.10.2/24
+```
+```shell
+aos-SwitchB(config-if)# ping 10.10.10.1
+PING 10.10.10.1 (10.10.10.1) 100(128) bytes of data.
+108 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=16.0 ms
+108 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=2.55 ms
+108 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=3.09 ms
+108 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=3.10 ms
+108 bytes from 10.10.10.1: icmp_seq=5 ttl=64 time=3.10 ms
+
+--- 10.10.10.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4003ms
+rtt min/avg/max/mdev = 2.545/5.569/16.011/5.225 ms
 ```
