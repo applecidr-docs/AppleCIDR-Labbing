@@ -58,7 +58,6 @@ ssh manager@clab-aruba-quick-start-aos-SwitchA
 
 ```bash
 127.0.0.1       localhost
-127.0.1.1       ITD000117.eriecountygov.local   ITD000117
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     localhost ip6-localhost ip6-loopback
@@ -71,7 +70,7 @@ ff02::2 ip6-allrouters
 3fff:172:20:20::3       clab-aruba-quick-start-aos-SwitchB      # Kind: aruba_aoscx
 ###### CLAB-aruba-quick-start-END ######
 ```
-###### Example of /etc/hosts file
+###### _Example of /etc/hosts file_
 ```bash
 # Containerlab SSH Config for the aruba-quick-start lab
 Host clab-aruba-quick-start-aos-SwitchA
@@ -84,4 +83,4 @@ Host clab-aruba-quick-start-aos-SwitchB
         StrictHostKeyChecking=no
         UserKnownHostsFile=/dev/null
 ```
-###### Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file
+###### _Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file_
