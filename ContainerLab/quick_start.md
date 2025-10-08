@@ -102,3 +102,15 @@ if match:  # got a match!
 # --- snip ---
 ```
 ### III. Run show commands
+I have SSH'd into both switches using `ssh admin@clab-aruba-quick-start-aos-SwitchA` and `ssh admin@clab-aruba-quick-start-aos-SwitchB`. By default the interfaces of the switch simulator are administratively disabled, so before running our show commands we are going to enable the interfaces:
+```shell
+aos-SwitchA# conf t
+aos-SwitchA(config)# int 1/1/1
+aos-SwitchA(config-if)# no shut
+aos-SwitchA(config-if)#
+
+aos-SwitchB# conf t
+aos-SwitchB(config)# int 1/1/1
+aos-SwitchB(config-if)# no shut
+aos-SwitchB(config-if)# 
+```
