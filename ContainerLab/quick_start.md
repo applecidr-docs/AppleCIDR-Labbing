@@ -102,7 +102,7 @@ if match:  # got a match!
 # --- snip ---
 ```
 ### III. Run show commands
-I have SSH'd into both switches using `ssh admin@clab-aruba-quick-start-aos-SwitchA` and `ssh admin@clab-aruba-quick-start-aos-SwitchB`. By default the interfaces of the switch simulator are administratively disabled, so before running our show commands we are going to enable the interfaces:
+I have connected to the switches via the following SSH commands `ssh admin@clab-aruba-quick-start-aos-SwitchA` and `ssh admin@clab-aruba-quick-start-aos-SwitchB`. By default the interfaces of the switch simulator are administratively disabled, so before running our show commands we are going to enable the interfaces:
 ```shell
 aos-SwitchA# conf t
 aos-SwitchA(config)# int 1/1/1
@@ -113,4 +113,35 @@ aos-SwitchB# conf t
 aos-SwitchB(config)# int 1/1/1
 aos-SwitchB(config-if)# no shut
 aos-SwitchB(config-if)# 
+```
+Now that the interfaces have been enabled, we can run an LLDP neighbor command to see that the two switches are in fact connect to each other on interface 1/1/1
+```shell
+aos-SwitchA# show lldp neighbor-info 
+
+LLDP Neighbor Information 
+=========================
+
+Total Neighbor Entries          : 1
+Total Neighbor Entries Deleted  : 0
+Total Neighbor Entries Dropped  : 0
+Total Neighbor Entries Aged-Out : 0
+
+LOCAL-PORT  CHASSIS-ID         PORT-ID                      PORT-DESC                    TTL      SYS-NAME    
+-----------------------------------------------------------------------------------------------------------
+1/1/1       08:00:09:b2:2c:3a  1/1/1                        1/1/1                        120      aos-SwitchB
+```
+```shell
+aos-SwitchB# show lldp neighbor-info 
+
+LLDP Neighbor Information 
+=========================
+
+Total Neighbor Entries          : 1
+Total Neighbor Entries Deleted  : 0
+Total Neighbor Entries Dropped  : 0
+Total Neighbor Entries Aged-Out : 0
+
+LOCAL-PORT  CHASSIS-ID         PORT-ID                      PORT-DESC                    TTL      SYS-NAME    
+-----------------------------------------------------------------------------------------------------------
+1/1/1       08:00:09:ea:bd:da  1/1/1                        1/1/1                        120      aos-SwitchA
 ```
