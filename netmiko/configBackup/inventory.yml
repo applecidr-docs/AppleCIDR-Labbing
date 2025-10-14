@@ -1,1 +1,4 @@
-
+devices:
+  Switch01:
+    host: switchIP or Hostname
+    device_type: aruba_aoscx
