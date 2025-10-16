@@ -7,8 +7,14 @@ tagline: Just an idiot labbing networks
 description: Just an idiot that loves networking
 
 mainNav:
-  - name: "TEST"
+  - name: "ContainerLab"
+    link: /ContainerLab/prerequisites
+  - name: "Netbox"
+    link: /Netbox/certInstall
+  - name: "Ansible"
     link: /ansible/install
+  - name: "netmiko"
+    link: /netmiko/configBackup
 
 nav:
   - name: "Home"
