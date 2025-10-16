@@ -6,6 +6,10 @@ title: AppleCIDR Labbing
 tagline: Just an idiot labbing networks
 description: Just an idiot that loves networking
 
+mainNav:
+  - name: "TEST"
+    link: /ansible/install
+
 nav:
   - name: "Home"
     link: /
