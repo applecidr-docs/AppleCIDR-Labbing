@@ -16,7 +16,7 @@ mainNav:
   - name: "netmiko"
     link: /netmiko/configBackup
 
-nav:
+clabnav:
   - name: "Home"
     link: /
   - name: "Prerequisites"
