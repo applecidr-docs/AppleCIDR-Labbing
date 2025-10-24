@@ -10,4 +10,4 @@ title: VS Code Extention
   ```bash
   sudo apt install code
   ```
-  C. Now that VS Code is installed, open the program and click on the 'Extensions' icon in the menu on the left-hand side. The icon should look this this: ![VS Code Extension icon](/images/vsCodeExt)
+  C. Now that VS Code is installed, open the program and click on the 'Extensions' icon in the menu on the left-hand side. The icon should look this this: ![VS Code Extension icon](/images/vsCodeExt.png)
