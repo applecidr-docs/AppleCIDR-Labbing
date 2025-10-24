@@ -1,7 +1,7 @@
 ---
 title: ContainerLab Quick Start
 ---
-{% include nav.html %}
+{% include clabnav.html %}
 <br>
 > Let's make a quick ContainerLab config file with two Aruba CX Switches connected to one another
 
