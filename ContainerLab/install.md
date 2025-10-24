@@ -1,5 +1,5 @@
 ---
-title: ContainerLab Install
+title: Install
 ---
 {% include clabnav.html %}
 <br>
