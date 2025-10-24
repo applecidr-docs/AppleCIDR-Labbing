@@ -1,5 +1,5 @@
 ---
-title: ContainerLab Quick Start
+title: Quick Start
 ---
 {% include clabnav.html %}
 <br>
