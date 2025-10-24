@@ -1,4 +1,4 @@
 ---
 title: VS Code Extention
 ---
-{% include nav.html %}
+{% include clabnav.html %}
