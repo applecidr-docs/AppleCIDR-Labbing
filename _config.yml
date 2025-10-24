@@ -25,3 +25,5 @@ nav:
     link: /ContainerLab/install
   - name: "Quick Start"
     link: /ContainerLab/quick_start
+  - name: "VS Code Extension"
+    link: /ContainerLab/vscodeext
