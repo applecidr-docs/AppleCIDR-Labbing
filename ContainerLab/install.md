@@ -1,7 +1,7 @@
 ---
 title: ContainerLab Install
 ---
-{% include nav.html %}
+{% include clabnav.html %}
 <br>
 > We will be adding the ContainerLab repository to the sources.list.d directory in order to install ContainerLab via APT. These instructions can be found in the official ContainerLab documentation <a href="https://containerlab.dev/install/#__tabbed_1_1">here</a>
 
