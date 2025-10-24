@@ -1,7 +1,7 @@
 ---
 title: Prerequisites
 ---
-{% include nav.html %}
+{% include clabnav.html %}
 <br>
 > This setup was completed on Debian 12 (bookworm). Before installing Containerlab, we will need to ensure all prerequisites are met.
 
