@@ -3,27 +3,27 @@ SwitchA:
     username: admin
     password: admin
     platform: aruba_aoscx
-    hostname: 172.20.20.2
+    hostname: 172.20.20.3
 SwitchB:
     username: admin
     password: admin
     platform: aruba_aoscx
-    hostname: 172.20.20.5
+    hostname: 172.20.20.6
 HostA:
     username: clab
     password: clab@123
     platform: generic_vm
-    hostname: 172.20.20.3
+    hostname: 172.20.20.5
 HostB:
     username: clab
     password: clab@123
     platform: generic_vm
-    hostname: 172.20.20.7
+    hostname: 172.20.20.2
 HostC:
     username: clab
     password: clab@123
     platform: generic_vm
-    hostname: 172.20.20.6
+    hostname: 172.20.20.7
 HostD:
     username: clab
     password: clab@123
