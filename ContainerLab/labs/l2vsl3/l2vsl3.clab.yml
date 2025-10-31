@@ -1,0 +1,29 @@
+name: aruba
+
+topology:
+  nodes:
+    SwitchA:
+      kind: aruba_aoscx
+      image: aruba_aoscx:10_16_1006
+    SwitchB:
+      kind: aruba_aoscx
+      image: aruba_aoscx:10_16_1006
+    HostA:
+      kind: generic_vm
+      image: ubuntu:jammy
+    HostB:
+      kind: generic_vm
+      image: ubuntu:jammy
+    HostC:
+      kind: generic_vm
+      image: ubuntu:jammy
+    HostD:
+      kind: generic_vm
+      image: ubuntu:jammy
+
+  links:
+    - endpoints: [ SwitchA:1/1/1, SwitchB:1/1/1 ]
+    - endpoints: [ SwitchA:1/1/3, HostA:eth1 ]
+    - endpoints: [ SwitchA:1/1/4, HostB:eth1 ]
+    - endpoints: [ SwitchB:1/1/3, HostC:eth1 ]
+    - endpoints: [ SwitchB:1/1/4, HostD:eth1 ]
