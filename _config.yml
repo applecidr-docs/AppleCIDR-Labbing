@@ -16,7 +16,7 @@ mainNav:
   - name: "netmiko"
     link: /netmiko/configBackup
   - name: "Labs"
-    link: /ContainerLab/labs
+    link: /ContainerLab/labs/labs
 
 clabnav:
   - name: "Home"
