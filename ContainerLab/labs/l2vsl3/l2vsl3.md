@@ -229,6 +229,9 @@ PING 10.10.10.6 (10.10.10.6) 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
 ```
 
-### ARP
-- 1. When pinging HostC, HostA will first check it's ARP cache for an entry for 10.10.10.6
-- 2. Since the ARP cache of HostA has been flushed, HostA will send an ARP request 
+### ARP Process
+1. When pinging HostC, HostA will first check it's ARP cache for an entry for 10.10.10.6
+2. Since the ARP cache of HostA has been flushed, HostA will send an ARP request asking "I am looking for the MAC address that belongs to IP address 10.10.10.6"
+3. When SwitchA recieves the ARP request from HostA, it broadcasts the ARP request out and interface in VLAN 10 besides the interface the request came from (for this lab, the only pertinant interface is 1/1/1).
+4. SwitchB will complete the same process as SwitchA and forward the ARP request to interface 1/1/3 (The only interface that is a member of VLAN 10).
+5. When HostC recieves the ARP request, it recognizes that the IP address that is being requested is assigned to it's interface and will send an ARP reply with it's MAC address.
