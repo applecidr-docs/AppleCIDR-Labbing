@@ -4,11 +4,11 @@ title: Layer 2 vs. Layer 3 traffic
 {% include clabnav.html %}
 > During my time working in networking, I have come across plenty of people who have a hard time understanding the difference between layer 2 and layer 3 traffic. This lab attempts to explain the difference between the two, and why the distinction is important. 
 
-# I. Lab topology
+# Lab topology
 ![l2vsl3 topology](/images/l2vsl3.png)
 # Setup:
 This lab will be using two Aruba CX switches and four Linux host machines. Two hosts are connected to each switch with one host on each switch configured for VLAN 10 and and one configured for VLAN 20.
-## A. Create lab directory and clab.yml file
+## Create lab directory and clab.yml file
 First, create a directory called 'l2vsl3' at the root of the home directory and cd into it:
 ```bash
 mkdir ~/l2vsl3/ && cd ~/l2vsl3/
@@ -63,7 +63,7 @@ clab deploy
 > Note, running `clab deploy` will only deploy the lab if you are in the lab directory (for this lab the ~/l2vsl3/ directory)
 
 
-## B. Connect to Switches
+## Connect to Switches
 Once the devices in the lab have booted (`clab inspect` will show the current status of each device), ssh into the two switches:
 ```bash
 ssh admin@clab-l2vsl3-SwitchA
@@ -72,7 +72,7 @@ ssh admin@clab-l2vsl3-SwitchB
 
 > Note, If your lab has a different name, the name of the devices will not be the same. Device names can be found by running `docker ps`. Names are listed under the NAMES column. Also, reading the /etc/hosts file will show the name of each device `cat /etc/hosts`
 
-## C. Configure SwitchA
+## Configure SwitchA
 First, create VLAN 10 and VLAN 20 and name them:
 ```bash
 SwitchA# conf t
@@ -108,7 +108,7 @@ SwitchA(config-if)# no routing
 SwitchA(config-if)# vlan access 20
 ```
 
-## D. Configure SwitchB
+## Configure SwitchB
 SwitchB will have a very similar configuration:
 ```bash
 SwitchB# conf t
@@ -132,7 +132,7 @@ SwitchB(config-if)# no routing
 SwitchB(config-if)# vlan access 20
 ```
 
-## E. Configure Hosts
+## Configure Hosts
 SSH into each host:
 ```bash
 ssh clab@clab-l2vsl3-HostA
@@ -142,3 +142,19 @@ ssh clab@clab-l2vsl3-HostD
 ```
 
 > Note, the default username and password for the Ubuntu vm is 'clab' and 'clab@123'
+
+## Assign IP addresses to each host
+After SSH'ing into each host, assign the designated IP address to ens2
+```bash
+clab@HostA:~$ sudo ip addr add dev ens2 10.10.10.5/24
+clab@HostA:~$ sudo ip link set dev ens2 up
+
+clab@HostB:~$ sudo ip addr add dev ens2 10.10.20.5/24
+clab@HostB:~$ sudo ip link set dev ens2 up
+
+clab@HostC:~$ sudo ip addr add dev ens2 10.10.10.6/24
+clab@HostC:~$ sudo ip link set dev ens2 up
+
+clab@HostD:~$ sudo ip addr add dev ens2 10.10.20.6/24
+clab@HostD:~$ sudo ip link set dev ens2 up
+```
