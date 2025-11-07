@@ -185,3 +185,50 @@ PING 10.10.20.5 (10.10.20.5) 56(84) bytes of data.
 ```
 
 The ping fails. HostA is able to traverse both switches and communicate with HostC, but is not able to communicate with HostB on the same switch.
+
+# Explaination
+Pinging from HostA to HostC works because these hosts are in the same VLAN. VLANs are a layer 2 technology, so no routing is needed because ARP is providing HostA with HostC's MAC address. 
+
+## Let's go through the ARP process
+First, clear the ARP cache on HostA:
+```bash
+clab@HostA:~$ sudo ip neighbor flush all dev ens2
+```
+
+Next, ensure the ARP cache is clear:
+```bash
+clab@HostC:~$ sudo ip neighbor show dev ens2
+```
+
+Notice there are no ARP entries for dev ens2.
+
+Find the MAC address of HostC:
+```bash
+clab@HostC:~$ ip addr show dev ens2
+3: ens2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 0c:00:2b:11:82:01 brd ff:ff:ff:ff:ff:ff
+    altname enp1s2
+    inet 10.10.10.6/24 scope global ens2
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e00:2bff:fe11:8201/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+HostC's MAC address: 0c:00:2b:11:82:01
+
+Now, ping from HostA to HostC to kick off the ARP process:
+```bash
+clab@HostA:~$ ping 10.10.10.6
+PING 10.10.10.6 (10.10.10.6) 56(84) bytes of data.
+64 bytes from 10.10.10.6: icmp_seq=1 ttl=64 time=1.88 ms
+64 bytes from 10.10.10.6: icmp_seq=2 ttl=64 time=2.53 ms
+64 bytes from 10.10.10.6: icmp_seq=3 ttl=64 time=2.57 ms
+64 bytes from 10.10.10.6: icmp_seq=4 ttl=64 time=2.53 ms
+--- 10.10.10.6 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
+```
+
+### ARP
+- 1. When pinging HostC, HostA will first check it's ARP cache for an entry for 10.10.10.6
+- 2. Since the ARP cache of HostA has been flushed, HostA will send an ARP request 
