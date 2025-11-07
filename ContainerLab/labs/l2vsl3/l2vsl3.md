@@ -229,27 +229,125 @@ PING 10.10.10.6 (10.10.10.6) 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
 ```
 
-### ARP Process
-1. When pinging HostC, HostA will first check it's ARP cache for an entry for 10.10.10.6
-2. Since the ARP cache of HostA has been flushed, HostA will send an ARP request asking "I am looking for the MAC address that belongs to IP address 10.10.10.6"
-3. When SwitchA recieves the ARP request from HostA, it broadcasts the ARP request out and interface in VLAN 10 besides the interface the request came from (for this lab, the only pertinant interface is 1/1/1).
-4. SwitchB will complete the same process as SwitchA and forward the ARP request to interface 1/1/3 (The only interface that is a member of VLAN 10).
-5. When HostC recieves the ARP request, it recognizes that the IP address that is being requested is assigned to it's interface and will send an ARP reply with it's MAC address.
-6. Once HostA receives the ARP reply from HostC, it uses HostC's MAC address as the destination address in the ping request packet.
-
 ### ARP Process in Wireshark
 Here is the initial ARP request coming from HostA:
+
 ![ARP Request](/images/arpRequest.png)
 > Notice that the Source MAC address is HostA's MAC address and The Destination address is a broadcast address
 
 HostC Then replys with it's MAC address:
+
 ![ARP Reply](/images/arpReply.png)
 > HostC replys to HostA's ARP request by providing it's MAC address
 
 Now that HostA has HostC's MAC address it sends a ping request:
+
 ![Ping Request](/images/pingRequest.png)
 If we look at the details of the packet, we will see that the ping request has HostC's MAC address listed as the Layer 2 destination.
 ![Ping Request Detail](/images/pingRequestDetail.png)
 
 Finally, HostC sends a ping reply to HostA to complete the ping process:
+
 ![Ping Reply](/images/pingReply.png)
+
+This same process will not work if HostA attempts to ping HostB because when SwitchA recieves the ARP request from HostA it will not forward it out interface 1/1/4 (The interface HostB is connected to) because that interface is a member of VLAN 20, not VLAN 10. Because ARP is sending a broadcast at layer 2, the traffic will not leave the VLAN it originated in (VLAN 10).
+
+# Routing
+Now that we know each device can communicate with other devices within it's VLAN, let's add routing so that all of the devices can communicate. To do this, we will add a dedicated VLAN for Management. In order for the switches to be able to route, they both need an interface in the same vlan.
+
+Let's add VLAN 100, give it a name of 'MGMT', assign an IP address according to the topology, and allow VLAN 100 to traverse the trunk between SwitchA and SwitchB:
+```bash
+SwitchA# conf t
+SwitchA(config)# vlan 100
+SwitchA(config-vlan-100)# name MGMT
+SwitchA(config-vlan-100)# int vlan 100
+SwitchA(config-if-vlan)# ip add 10.10.1.1/24
+SwitchA(config-if-vlan)# int 1/1/1
+SwitchA(config-if)# vlan trunk allowed 100
+
+SwitchB# conf t
+SwitchB(config)# vlan 100
+SwitchB(config-vlan-100)# name MGMT
+SwitchB(config-vlan-100)# int vlan 100
+SwitchB(config-if-vlan)# ip add 10.10.1.2/24
+SwitchB(config-if-vlan)# int 1/1/1
+SwitchB(config-if)# vlan trunk allowed 100
+```
+
+Ensure connectivity between SwitchA and SwitchB via VLAN 100:
+```bash
+SwitchB(config)# ping 10.10.1.1
+PING 10.10.1.1 (10.10.1.1) 100(128) bytes of data.
+108 bytes from 10.10.1.1: icmp_seq=1 ttl=64 time=24.0 ms
+108 bytes from 10.10.1.1: icmp_seq=2 ttl=64 time=2.50 ms
+108 bytes from 10.10.1.1: icmp_seq=3 ttl=64 time=3.25 ms
+108 bytes from 10.10.1.1: icmp_seq=4 ttl=64 time=2.99 ms
+```
+
+Now that the two switches have an IP address in the same subnet, we can use those IP addresses to create static routes. Let's start on SwitchA:
+```bash
+SwitchA# conf t
+SwitchA(config)# ip route 10.10.20.0 255.255.255.0 10.10.1.2
+```
+
+What this route statment is saying is "If you (SwitchA) recieve traffic with a destination address anywhere in the 10.10.20.0/24 subnet, forward that traffic to 10.10.1.2 (SwitchB).
+With that route statment set, we now need a route statment set on SwitchB:
+```bash
+SwitchB# conf t
+SwitchB(config)# ip route 10.10.10.0 255.255.255.0 10.10.1.1
+```
+
+> If this second route statement on SwitchB is not specified, traffic that is destinstined for 10.10.10.0/24 will not be able to reach it's destination. This includes return traffic that originated from that subnet (traffic from HostA or HostC for example).
+
+SwitchA is now able to ping interface VLAN 20 on SwitchB and SwitchB can ping interface VLAN 10 on SwitchA:
+```bash
+SwitchA# ping 10.10.20.1
+PING 10.10.20.1 (10.10.20.1) 100(128) bytes of data.
+108 bytes from 10.10.20.1: icmp_seq=1 ttl=64 time=1.76 ms
+108 bytes from 10.10.20.1: icmp_seq=2 ttl=64 time=3.44 ms
+108 bytes from 10.10.20.1: icmp_seq=3 ttl=64 time=2.33 ms
+108 bytes from 10.10.20.1: icmp_seq=4 ttl=64 time=1.25 ms
+
+SwitchB(config)# ping 10.10.10.1
+PING 10.10.10.1 (10.10.10.1) 100(128) bytes of data.
+108 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=1.13 ms
+108 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=2.68 ms
+108 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=2.33 ms
+108 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=2.81 ms
+```
+
+But, if we attempt to ping from HostA to HostB, or HostD, or even interface VLAN 20 on SwitchB the ping continues to fail:
+```bash
+clab@HostA:~$ ping 10.10.20.5
+PING 10.10.20.5 (10.10.20.5) 56(84) bytes of data.
+^C
+--- 10.10.20.5 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4076ms
+```
+
+This is because HostA needs to know where to send this traffic, and needs a default gateway in order to do so. 
+> Typically, a default gateway would just be set on HostA using the following command `ip route add default dev ens2 via 10.10.10.1`, but because we are utilizing vrnetlab to facilitate the Ubuntu VM, which essentially puts the Ubuntu VM inside of another VM we will need to configure a new routing table and a rule to send all traffic with a source of ens2 to use that custom table:
+
+1. Add a name for the new table to `/etc/iproute2/rt_tables`
+```bash
+clab@HostA:~$ echo "200 ens2" | sudo tee -a /etc/iproute2/rt_tables
+```
+
+2. Populate the ens2 table with a route to directly-connected subnet:
+```bash
+clab@HostA:~$ sudo ip route add 10.10.10.0/24 dev ens2 src 10.10.10.5 table ens2
+```
+
+3. Populate the ens2 table with a default route
+```bash
+clab@HostA:~$ sudo ip route add default via 10.10.10.1 dev ens2 table ens2
+```
+
+4. Create a rule that all traffic with a source of ens2 will use table ens2
+```bash
+clab@HostA:~$ sudo ip rule add from 10.10.10.5/32 table ens2 priority 100
+```
+
+5. Finally, flush the route cache to ensure the new table and rule will be in use:
+```bash
+clab@HostA:~$ sudo ip route flush cache
