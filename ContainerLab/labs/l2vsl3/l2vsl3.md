@@ -206,7 +206,7 @@ Find the MAC address of HostC:
 ```bash
 clab@HostC:~$ ip addr show dev ens2
 3: ens2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 0c:00:2b:11:82:01 brd ff:ff:ff:ff:ff:ff
+    link/ether 0c:00:9a:d6:d7:01 brd ff:ff:ff:ff:ff:ff
     altname enp1s2
     inet 10.10.10.6/24 scope global ens2
        valid_lft forever preferred_lft forever
@@ -214,7 +214,7 @@ clab@HostC:~$ ip addr show dev ens2
        valid_lft forever preferred_lft forever
 ```
 
-HostC's MAC address: 0c:00:2b:11:82:01
+HostC's MAC address: 0c:00:9a:d6:d7:01
 
 Now, ping from HostA to HostC to kick off the ARP process:
 ```bash
@@ -235,3 +235,21 @@ rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
 3. When SwitchA recieves the ARP request from HostA, it broadcasts the ARP request out and interface in VLAN 10 besides the interface the request came from (for this lab, the only pertinant interface is 1/1/1).
 4. SwitchB will complete the same process as SwitchA and forward the ARP request to interface 1/1/3 (The only interface that is a member of VLAN 10).
 5. When HostC recieves the ARP request, it recognizes that the IP address that is being requested is assigned to it's interface and will send an ARP reply with it's MAC address.
+6. Once HostA receives the ARP reply from HostC, it uses HostC's MAC address as the destination address in the ping request packet.
+
+### ARP Process in Wireshark
+1. Here is the initial ARP request coming from HostA:
+![ARP Request](/images/arpRequest.png)
+> Notice that the Source MAC address is HostA's MAC address and The Destination address is a broadcast address
+
+2. HostC Then replys with it's MAC address:
+![ARP Reply](/images/arpReply.png)
+> HostC replys to HostA's ARP request by providing it's MAC address
+
+3. Now that HostA has HostC's MAC address it sends a ping request:
+![Ping Request](/images/pingRequest.png)
+If we look at the details of the packet, we will see that the ping request has HostC's MAC address listed as the Layer 2 destination.
+![Ping Request Detail](/images/pingRequestDetail.png)
+
+4. Finally, HostC sends a ping reply to HostA to complete the ping process:
+![Ping Reply](/images/pingReply.png)
