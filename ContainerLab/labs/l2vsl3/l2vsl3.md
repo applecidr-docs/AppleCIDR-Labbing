@@ -238,18 +238,18 @@ rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
 6. Once HostA receives the ARP reply from HostC, it uses HostC's MAC address as the destination address in the ping request packet.
 
 ### ARP Process in Wireshark
-1. Here is the initial ARP request coming from HostA:
+Here is the initial ARP request coming from HostA:
 ![ARP Request](/images/arpRequest.png)
 > Notice that the Source MAC address is HostA's MAC address and The Destination address is a broadcast address
 
-2. HostC Then replys with it's MAC address:
+HostC Then replys with it's MAC address:
 ![ARP Reply](/images/arpReply.png)
 > HostC replys to HostA's ARP request by providing it's MAC address
 
-3. Now that HostA has HostC's MAC address it sends a ping request:
+Now that HostA has HostC's MAC address it sends a ping request:
 ![Ping Request](/images/pingRequest.png)
 If we look at the details of the packet, we will see that the ping request has HostC's MAC address listed as the Layer 2 destination.
 ![Ping Request Detail](/images/pingRequestDetail.png)
 
-4. Finally, HostC sends a ping reply to HostA to complete the ping process:
+Finally, HostC sends a ping reply to HostA to complete the ping process:
 ![Ping Reply](/images/pingReply.png)
