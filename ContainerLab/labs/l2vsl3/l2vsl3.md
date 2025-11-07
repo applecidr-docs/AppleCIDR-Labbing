@@ -158,3 +158,30 @@ clab@HostC:~$ sudo ip link set dev ens2 up
 clab@HostD:~$ sudo ip addr add dev ens2 10.10.20.6/24
 clab@HostD:~$ sudo ip link set dev ens2 up
 ```
+
+# Verify connectivity
+Ping from HostA to HostC:
+```bash
+clab@HostA:~$ ping 10.10.10.6
+PING 10.10.10.6 (10.10.10.6) 56(84) bytes of data.
+64 bytes from 10.10.10.6: icmp_seq=1 ttl=64 time=1.88 ms
+64 bytes from 10.10.10.6: icmp_seq=2 ttl=64 time=2.53 ms
+64 bytes from 10.10.10.6: icmp_seq=3 ttl=64 time=2.57 ms
+64 bytes from 10.10.10.6: icmp_seq=4 ttl=64 time=2.53 ms
+--- 10.10.10.6 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 1.879/2.375/2.566/0.287 ms
+```
+
+HostA is able to ping HostC even though a default gateway has not been set on HostA.
+
+Attempt to ping from HostA to HostB:
+```bash
+clab@HostA:~$ ping 10.10.20.5
+PING 10.10.20.5 (10.10.20.5) 56(84) bytes of data.
+^C
+--- 10.10.20.5 ping statistics ---
+9 packets transmitted, 0 received, 100% packet loss, time 8192ms
+```
+
+The ping fails. HostA is able to traverse both switches and communicate with HostC, but is not able to communicate with HostB on the same switch.
