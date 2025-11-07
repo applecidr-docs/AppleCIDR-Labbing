@@ -326,28 +326,10 @@ PING 10.10.20.5 (10.10.20.5) 56(84) bytes of data.
 ```
 
 This is because HostA needs to know where to send this traffic, and needs a default gateway in order to do so. 
-> Typically, a default gateway would just be set on HostA using the following command `ip route add default dev ens2 via 10.10.10.1`, but because we are utilizing vrnetlab to facilitate the Ubuntu VM, which essentially puts the Ubuntu VM inside of another VM we will need to configure a new routing table and a rule to send all traffic with a source of ens2 to use that custom table:
+> Typically, a default gateway would just be set on HostA using the following command `ip route add default dev ens2 via 10.10.10.1`. This would send all traffic to SwitchA for routing, but because we are utilizing vrnetlab to facilitate the Ubuntu VM, which essentially puts the Ubuntu VM inside of another VM. we will need to configure a specifically to the 10.10.20.0/24 subnet:
 
-1. Add a name for the new table to `/etc/iproute2/rt_tables`
 ```bash
-clab@HostA:~$ echo "200 ens2" | sudo tee -a /etc/iproute2/rt_tables
+clab@HostA:~$ sudo ip route add 10.10.20.0/24 via 10.10.10.1
+
+clab@HostB:~$ sudo ip route add 10.10.10.0/24 via 10.10.20.1
 ```
-
-2. Populate the ens2 table with a route to directly-connected subnet:
-```bash
-clab@HostA:~$ sudo ip route add 10.10.10.0/24 dev ens2 src 10.10.10.5 table ens2
-```
-
-3. Populate the ens2 table with a default route
-```bash
-clab@HostA:~$ sudo ip route add default via 10.10.10.1 dev ens2 table ens2
-```
-
-4. Create a rule that all traffic with a source of ens2 will use table ens2
-```bash
-clab@HostA:~$ sudo ip rule add from 10.10.10.5/32 table ens2 priority 100
-```
-
-5. Finally, flush the route cache to ensure the new table and rule will be in use:
-```bash
-clab@HostA:~$ sudo ip route flush cache
