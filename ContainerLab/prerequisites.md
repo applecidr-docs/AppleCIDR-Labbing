@@ -61,3 +61,9 @@ sudo docker run hello-world
 
 #### A. If you do not already have an HPE Support Portal account you will need to create one <a href="https://networkingsupport.hpe.com/">here</a>
 #### B. Once you are logged into the HPE Support Portal go to the Downloads page <a href="https://networkingsupport.hpe.com/globalsearch#tab=Software">here</a>, search for "Switch Simulator", and sort by "Date: New to Old"
+
+> That's it for prerequisites. Other containers and VMs can be downloaded and implemented, but for now I am going to stick to the Aruba CX Switch. Please continue on to the [Install](/ContainerLab/install) page.
+
+<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
+Thanks for reading!
+</p>
