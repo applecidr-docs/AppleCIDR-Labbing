@@ -55,3 +55,9 @@ I am going to tag the docker image with the version of the image for ease of use
 ```bash
 docker tag vrnetlab/vr-aoscx:20250822141147 aruba_aoscx:10_16_1006
 ```
+
+> ContainerLab is now successfully installed and the Aruba CX Switch VM is available to be used. Next, read through and complete the [Quick Start](/ContainerLab/quick_start) guide.
+
+<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
+Thanks for reading!
+</p>
