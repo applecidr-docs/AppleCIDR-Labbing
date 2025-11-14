@@ -21,13 +21,16 @@ Within the 'Extensions' menu search for 'ContainerLab' and click the blue 'Insta
 code quick-start.clab.yml
 ```
 
-Once your clab yml file is open in VS Code, you can the 'Graph' icon in the top right-hand corner of VS Code or use the keyboard shortcut `Ctrl+Alt+G`. This will open a new window in VS Code, showing a topographical representation of the lab. Now, you can add text, change icons, and ultimatly deploy the lab from within the topology viewer by clicking the 'play' button.
+Once your clab yaml file is open in VS Code, you can click the 'Graph' icon in the top right-hand corner of VS Code or use the keyboard shortcut `Ctrl+Alt+G`. This will open a new window in VS Code, showing a topographical representation of the lab. Now, you can add text, change icons, and ultimatly deploy the lab from within the topology viewer by clicking the 'play' button.
 
-Give the lab a couple of minutes to fully boot. The devices in the lab can now be interacted with directly. By right-clicking on a device you have the option to open an SSH console, a Shell console, view logs, and view properties.
+Give the lab a couple of minutes to fully boot. The devices in the lab can now be interacted with inside of VS Code. By right-clicking on a device you have the option to open an SSH console, a Shell console, view logs, and view properties:
+
 ![VS Code SSH](/images/vscode_ssh.png)
-There is also an option run with WireShark packet capture on each device interface by right-clicking any of the links between devices and selecting one of the interfaces.
+
+There is also the option to run a WireShark packet capture on each device interface by right-clicking any of the links between devices and selecting one of the interfaces:
+
 ![VS Code Wireshark](/images/vscode_wireshark.png)
-> The first time that you select an interface to run WireShark on, ContainerLab will download the ghostwire and packetflix containers. 
+> The first time that you select an interface to capture packets on, ContainerLab will automatically download and start up the ghostwire and packetflix containers that are necessary for WireShark to run. 
 
 ## Conclusion
 

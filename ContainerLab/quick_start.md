@@ -19,20 +19,27 @@ sudo nano aruba-quick-start.clab.yml
 > The two switches will be called 'aos-SwitchA' and 'aos-SwitchB'. The two switches will be connect via interface 1/1/1.
 
 ```yaml
+# Give the lab a name
 name: aruba-quick-start
 
+# Define the topology for the lab
 topology:
   nodes:
+    # Provide names for each node in the lab
     aos-SwitchA:
+      # Kinds tell ContainerLab how to setup different devices when a lab is deployed
       kind: aruba_aoscx
       image: aruba_aos-cx:10_16_1006
     aos-SwitchB:
       kind: aruba_aoscx
       image: aruba_aos-cx:10_16_1006
 
+  # Links tell ContainerLab how each device is going to connect to one another
   links:
     - endpoints: [aos-SwitchA:1/1/1, aos-SwitchB:1/1/1]
 ```
+> If you'd like to find out more about the different Kinds that ContainerLab supports, please go to the official ContainerLab [Kinds](https://containerlab.dev/manual/kinds/) page.
+
 #### C. Deploy the ContainerLab
 We will run the clab deploy command from inside the aruba-quick-start directory. ContainerLab will read the .clab.yml file and deploy the lab.
 > The Aruba CX Switch Simulator will take ~ 2 minutes to boot
@@ -45,8 +52,8 @@ ContainerLab will show the Name, Kind/Image, State, and IP address information f
 ```bash
 docker ps
 ```
-This docker command will show the docker containers are running and will also show you the name of the container.
-> ContainerLab will prepend 'clab' and the name of the lab to each node name. For instance, with this lab SwitchA's container will be named 'clab-aruba-quick-start-aos-SwitchA'
+This docker command will show which docker containers are running and will also show you the name of the container.
+> By default, ContainerLab will prepend 'clab' and the name of the lab to each node name. For instance, with this lab SwitchA's container will be named 'clab-aruba-quick-start-aos-SwitchA'
 
 ### II. Connecting to lab
 #### A. SSH
@@ -56,6 +63,7 @@ ssh admin@clab-aruba-quick-start-aos-SwitchA
 ```
 > Two things happen when ContainerLab spins up a lab in regards to SSH. First, ContainerLab adds entries to the /etc/hosts file so that we can SSH into the devices by name. Then, ContainerLab add SSH configs for the nodes to the /etc/ssh/ssh_config.d directory so that we are not prompted to accept the SSH keys when we connect.
 
+###### _Example of /etc/hosts file_
 ```bash
 127.0.0.1       localhost
 
@@ -70,7 +78,8 @@ ff02::2 ip6-allrouters
 3fff:172:20:20::3       clab-aruba-quick-start-aos-SwitchB      # Kind: aruba_aoscx
 ###### CLAB-aruba-quick-start-END ######
 ```
-###### _Example of /etc/hosts file_
+
+###### _Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file_
 ```bash
 # Containerlab SSH Config for the aruba-quick-start lab
 Host clab-aruba-quick-start-aos-SwitchA
@@ -83,7 +92,7 @@ Host clab-aruba-quick-start-aos-SwitchB
         StrictHostKeyChecking=no
         UserKnownHostsFile=/dev/null
 ```
-###### _Example of /etc/ssh/ssh_config.d/clab-aruba-quick-start.conf file_
+
 Now that we have connected to the switch via SSH, we are being asked to provide a password for the admin user. During the creation of the Docker image, a python script is ran that sets the password of 'admin'. The script can be found within the vrnetlab directory. The full path is _/vrnetlab/aruba/aoscx/docker/launch.py_ and below is the code snippet that sets the password of 'admin' for the built-in admin user.
 ```python
 # --- snip ---
@@ -145,7 +154,7 @@ LOCAL-PORT  CHASSIS-ID         PORT-ID                      PORT-DESC           
 -----------------------------------------------------------------------------------------------------------
 1/1/1       08:00:09:ea:bd:da  1/1/1                        1/1/1                        120      aos-SwitchA
 ```
-### IV. Let's test layer 3 connectivity!
+### IV. Let's test Layer 3 connectivity!
 We will assign an IP address to interface 1/1/1 on both switches and confirm connectivity using ping.
 ```shell
 aos-SwitchA# conf t
@@ -170,15 +179,15 @@ PING 10.10.10.1 (10.10.10.1) 100(128) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 4003ms
 rtt min/avg/max/mdev = 2.545/5.569/16.011/5.225 ms
 ```
-### V. Finally, we will destory the lab
+### V. Finally, we will destroy the lab
 Let's give the resources back to our host machine by destroying our lab
-> It's important that the `clab` commands are ran in the context of our lab's directory. Specifically in this case, the destory command must be ran inside the 'clab-quick-start' directory that was created at the beginning of this document.
+> It's important that the `clab` commands are ran in the context of our lab's directory. Specifically in this case, the destroy command must be ran inside the 'clab-quick-start' directory that was created at the beginning of this document.
 
 ```bash
-clab destory
+clab destroy
 ```
 ContainerLab will remove the docker containers, remove the /etc/hosts entries, and remove the SSH config files.
-> This lab was complete entirely from the command line. If you prefer a more visual approach to labbing, you can install the VSCode ContainerLab Extension. Instructions for doing so and using the extension can be found here.
+> This lab was completed entirely from the command line. If you prefer a more visual approach to labbing, you can install the VSCode ContainerLab Extension. Instructions for doing so and using the extension can be found [here](/ContainerLab/vscodeext).
 
 <p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
 Thanks for reading!
