@@ -1,3 +1,5 @@
+{% include clabnav.html %}
+
 # Introduction to ContainerLab
 
 ContainerLab is a powerful, lightweight framework designed to build and manage container-based networking labs. It gives network engineers, automation developers, and students the ability to simulate real-world network topologies using containers—making lab environments faster, easier to deploy, and more efficient than traditional VM-based solutions.
