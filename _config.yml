@@ -8,7 +8,7 @@ description: If it ain't broke, break it until you can fix it.
 
 mainNav:
   - name: "ContainerLab"
-    link: /ContainerLab/prerequisites
+    link: /ContainerLab/README
   - name: "Netbox"
     link: /Netbox/certInstall
   - name: "Ansible"
