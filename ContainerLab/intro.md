@@ -95,6 +95,4 @@ Unlike generic container platforms, ContainerLab includes:
 
 ContainerLab is a modern, efficient way to build full-featured networking labs using containers. Whether you're studying for certifications, testing automation pipelines, or designing complex architectures, ContainerLab offers a fast, scalable, and reproducible environment that fits the needs of today’s network engineers.
 
-<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
-Thanks for reading!
-</p>
+##### Thanks for reading!
