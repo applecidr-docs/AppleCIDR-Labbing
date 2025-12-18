@@ -8,7 +8,7 @@ mainNav:
   - name: "Ansible"
     link: /ansible/install
   - name: "Netmiko"
-    link: /netmiko/README
+    link: /netmiko
   - name: "Labs"
     link: /ContainerLab/labs/labs
 
