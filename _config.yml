@@ -5,12 +5,10 @@ description: If it ain't broke, break it until you can fix it.
 mainNav:
   - name: "ContainerLab"
     link: /ContainerLab/intro
-  - name: "Netbox"
-    link: /Netbox/certInstall
   - name: "Ansible"
     link: /ansible/install
   - name: "netmiko"
-    link: /netmiko/configBackup
+    link: /netmiko
   - name: "Labs"
     link: /ContainerLab/labs/labs
 
