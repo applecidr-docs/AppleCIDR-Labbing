@@ -64,6 +64,4 @@ sudo docker run hello-world
 
 > That's it for prerequisites. Other containers and VMs can be downloaded and implemented, but for now I am going to stick to the Aruba CX Switch. Please continue on to the [Install](/ContainerLab/install) page.
 
-<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
-Thanks for reading!
-</p>
+##### Thanks for reading!

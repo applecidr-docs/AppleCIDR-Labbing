@@ -36,6 +36,4 @@ There is also the option to run a WireShark packet capture on each device interf
 
 Personally, I am a visual learner so having a topology to look at while labbing is extremely helpful for understanding how a lab is configured. I highly recommend installing and using this extension!
 
-<p align="center" style="font-family: 'Lucida Handwriting', cursive; font-size: 16px; color:#b5e853">
-Thanks for reading!
-</p>
+##### Thanks for reading!
