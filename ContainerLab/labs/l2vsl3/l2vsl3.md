@@ -354,7 +354,9 @@ Packets are now flowing from one VLAN to another thanks to routing!
 
 # Conclusion
 Two devices that are in the same broadcast domain (Layer 2 domain) can communicate with on another without the help of routing thanks to the ARP process. A switch will forward broadcast traffic along to any interface that's in the same broadcast domain (in the case of this lab VLAN 10) allowing the ARP process to run successfully, providing the destination machine's MAC address to the originating machine, which ultimatley allows that originating machine to send a successful ping request via MAC address. 
+
 When we need to be able to traverse from one Layer 2 domain to another, Layer 3 needs to get involved. Layer 3 relys on IP addresses and routing in order to forward traffic. For this lab the switches are acting as both the Layer 2 and Layer 3 device (often referred to as multilayer switches) which gives them the ability to perform routing. 
+
 Route statements are needed in order to tell the switches how to reach a subnet that is not locally connected. What route statements tell the switch is "if you receive traffic destined for this subnet, forward the traffic along to this IP address". Now, each switch knows how to reach subnets outside of the locally connected subnets and will forward the traffic along to a switch that does have said subnet locally connected. The final piece of the puzzle is providing a gateway to the hosts themselves. The gateway tells the host "If you are sending traffic to another device that's outside of your subnet, send that traffic to this IP address". One thing to keep in mind is the host's gateway has to be in the same subnet as the host itself, otherwise the traffic will never reach the gateway at Layer 2 in order for it to be routed further at Layer 3.
 
 ##### Thanks for reading!
