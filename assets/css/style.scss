@@ -2,7 +2,17 @@
 ---
 
 @import "{{ site.theme }}";
-
 body {
-  background-color: #f0f0f0;
+  background-color: #081b2a;
+}
+
+h1 {
+  color: #00f2d4;
+  text-align: center;
+}
+
+p {
+  color: white;
+  font-family: verdana;
+  font-size: 20px;
 }
