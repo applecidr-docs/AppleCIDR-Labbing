@@ -3,32 +3,41 @@
 
 @import "{{ site.theme }}";
 body {
-  background-color: #91C6BC;
+  background-color: #090040;
 }
 
 h1 {
-  color: #4B9DA9;
+  color: #78B9B5;
   text-align: center;
 }
 
 h2 {
-  color: #4B9DA9;
+  color: #0F828C;
 }
 
 h3 {
-  color: #F6F3C2;
+  color: #0F828C;
 }
 
 h4 {
-  color: #F6F3C2;
+  color: #0F828C;
 }
 
 ul {
-  color: #E37434;
+  color: #0F828C;
 }
 
 p {
-  color: #F6F3C2;
+  color: #0f828c;
   font-family: verdana;
   font-size: 20px;
+}
+
+.markdown-body pre {
+  padding:16px;
+  overflow:auto;
+  font-size:85%;
+  line-height:1.45;
+  background-color:#D3DAD9;
+  border-radius:3px
 }
