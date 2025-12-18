@@ -1,7 +1,3 @@
-# remote_theme: pages-themes/hacker@v0.2.0
-# plugins:
-#  - jekyll-remote-theme # add this line to the plugins list if you already have one
-
 title: AppleCIDR Labbing
 tagline: Just an idiot that loves networking
 description: If it ain't broke, break it until you can fix it.
