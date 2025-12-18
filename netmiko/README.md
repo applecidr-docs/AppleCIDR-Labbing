@@ -1,3 +1,5 @@
+{% include netmikoNav.html %}
+
 # Netmiko Overview
 
 **Netmiko** is a Python library designed to simplify network device automation and management. It provides a consistent, easy-to-use interface for connecting to network devices over SSH and executing commands, without having to deal with low-level connection handling.
