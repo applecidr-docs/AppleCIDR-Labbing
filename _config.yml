@@ -23,3 +23,9 @@ clabnav:
     link: /ContainerLab/quick_start
   - name: "VS Code Extension"
     link: /ContainerLab/vscodeext
+
+netmikoNav:
+  - name: "Home"
+    link: /
+  - name: "Config Backup"
+    link: /netmiko/configBackup/configBackup.py
