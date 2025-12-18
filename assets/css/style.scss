@@ -38,12 +38,20 @@ p {
   font-family: verdana;
   font-size: 20px;
 }
-
 .highlight {
   padding:4px;
   overflow:auto;
   font-size:85%;
   line-height:1.45;
   background-color:#13e8e8;
+  border-radius:3px
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding:16px;
+  overflow:auto;
+  font-size:85%;
+  line-height:1.45;
+  background-color:#a1c2c9;
   border-radius:3px
 }
